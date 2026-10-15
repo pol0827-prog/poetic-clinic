@@ -54,7 +54,7 @@ firebase login
 
 ### 3) 프로젝트 ID 넣기
 
-`.firebaserc` 의 `YOUR-FIREBASE-PROJECT-ID` 를 1)에서 만든 프로젝트 ID 로 바꿉니다.
+`.firebaserc` 에 프로젝트 ID `poetic-clinic` 이 이미 들어 있어요. (다른 프로젝트로 옮길 때만 바꾸세요.)
 
 ### 4) Gemini API 키 등록 (한 번만)
 
