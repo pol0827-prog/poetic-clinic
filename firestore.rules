@@ -1,0 +1,25 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // 학생 본인만 자기 작품함을 읽고 쓸 수 있다
+    match /users/{uid}/works/{workId} {
+      allow read, delete: if request.auth != null && request.auth.uid == uid;
+      allow create, update: if request.auth != null
+        && request.auth.uid == uid
+        && request.resource.data.title is string
+        && request.resource.data.title.size() <= 100
+        && request.resource.data.lines is list
+        && request.resource.data.lines.size() <= 200;
+    }
+
+    // AI 사용량 기록은 서버(Cloud Functions)만 쓴다
+    match /usage/{docId} {
+      allow read, write: if false;
+    }
+
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}
